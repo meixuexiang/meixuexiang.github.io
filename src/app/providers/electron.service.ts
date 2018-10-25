@@ -8,12 +8,13 @@ import * as fs from 'fs';
 
 @Injectable()
 export class ElectronService {
-
+  private _electron: Electron.AllElectron = null;
   ipcRenderer: typeof ipcRenderer;
   webFrame: typeof webFrame;
   remote: typeof remote;
   childProcess: typeof childProcess;
   fs: typeof fs;
+  util: any;
 
   constructor() {
     // Conditional imports
@@ -24,11 +25,22 @@ export class ElectronService {
 
       this.childProcess = window.require('child_process');
       this.fs = window.require('fs');
+      this.util = this.remote.require('util');
     }
+  }
+
+  get electron() {
+    if (!this._electron) {
+      this._electron = window ? window['electron'] : null;
+    }
+    return this._electron;
   }
 
   isElectron = () => {
     return window && window.process && window.process.type;
   }
 
+  require(module) {
+    return this.remote.require(module);
+  }
 }

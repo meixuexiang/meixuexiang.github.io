@@ -1,0 +1,115 @@
+:host {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  input,
+  textarea {
+    font-family: monospace, Monaco, 'Lucida Console';
+  }
+  
+  nav {
+    width: 256px;
+    background: rgba(0, 0, 0, 0.6);
+    font-size: 16px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  nav ul {
+    flex: 1;
+  }
+  
+  nav li {
+    line-height: 30px;
+    margin: 4px;
+    border-radius: 4px;
+    background: rgba(201, 201, 201, 0.897);
+    padding: 6px;
+  }
+  
+  nav li p-inputSwitch {
+    float: right;
+  }
+  
+  .ui-btn-bar {
+    text-align: center;
+    padding-bottom: 4px;
+  }
+  
+  main {
+    flex: 1;
+    overflow: auto;
+  }
+  
+  main table {
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  
+  tr:hover {
+    background: rgba(184, 243, 179, 0.397);
+  }
+  
+  td {
+    padding: 2px 20px 2px 2px;
+    cursor: default;
+  }
+  
+  td.sharp {
+    font-weight: bold;
+    font-style: normal;
+    color: rgba(10, 10, 10, 0.897);
+    text-align: right;
+    padding: 4px;
+    min-width: 24px;
+    cursor: pointer;
+  }
+  
+  td.actived {
+    font-style: italic;
+    color: rgba(201, 201, 201, 0.897);
+  }
+  
+  td.domain {
+    max-width: 300px;
+  }
+  
+  td.env-name {
+    padding-left: 20px;
+    min-width: 120px;
+  }
+  
+  td span {
+    color: green;
+    float: right;
+    margin-left: 10px;
+  }
+  
+  td span.invalid {
+    color: rgba(233, 31, 31, 0.774);
+  }
+  
+  td span.exception {
+    color: rgba(226, 195, 17, 0.897);
+  }
+  
+  span.green {
+    margin-left: 5px;
+    font-size: 12px;
+    color: green;
+  }
+  
+  main textarea {
+    display: block;
+    width: 100%;
+    height: 100%;
+    resize: none;
+    padding: 4px;
+  }
+  

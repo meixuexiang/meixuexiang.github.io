@@ -1,0 +1,55 @@
+<div fxLayout="row" fxFlex class="box-in-out">
+  <dl fxLayout="column" fxFlex="50%" class="box-in">
+    <dt>Javascript(ES5)代码：</dt>
+    <dd fxFlex>
+      <textarea pInputTextarea [(ngModel)]="source"></textarea>
+    </dd>
+  </dl>
+  <dl fxLayout="column" fxFlex="50%" class="box-out">
+    <dt>Minify 结果：</dt>
+    <dd fxFlex>
+      <textarea pInputTextarea [(ngModel)]="output"></textarea>
+    </dd>
+  </dl>
+</div>
+
+<div class="ui-btn-bar">
+  <button pButton (click)="parse()" label="Parse"> </button>
+  <button pButton (click)="scopeAnalyzer()" label="Scope analyzer"> </button>
+  <button pButton (click)="minifyOptions()" label="Minify Options"> </button>
+  <button pButton (click)="minify()" label="Minify"> </button>
+  <a href="mailto:mxx@vip.qq.com" class="report-bug fa fa-envelope-o" title="For best tools, Email me"></a>
+</div>
+
+<p-growl [(value)]="msgs"></p-growl>
+
+<p-sidebar [(visible)]="visible" position="top" [style]="{height:'50em'}">
+    <app-options [items]="items" [form]="form"></app-options>
+</p-sidebar>
+
+<!--
+<div fxLayout="row" class="input-output">
+  <ul>
+    <li *ngFor="let r of arScopeAnalyzerRslt;">{{r.msg}} [{{r.pos.line}}:{{r.pos.col}}]</li>
+  </ul>
+</div> -->
+
+<!-- <div style="background-color:white;">
+  <p-fileUpload name="demo[]" (onSelect)="onSelect($event)" (onRemove)="onRemove($event)" (onClear)="onClear($event)" [multiple]="true"
+    accept=".js" maxFileSize="1000000" [showUploadButton]="false">
+    <ng-template let-file pTemplate="file">
+      <dl>
+        <dt>{{file.name}} - {{file.size}} bytes</dt>
+        <dd>
+          <textarea rows="4" cols="120">{{file.content}}</textarea>
+        </dd>
+      </dl>
+    </ng-template>
+  </p-fileUpload>
+</div>
+ -->
+
+<!--
+<p style="background-color:white;">Value: {{ form.value | json }}</p>
+<p style="background-color:white;">Validation status: {{ form.status }}</p>
+ -->

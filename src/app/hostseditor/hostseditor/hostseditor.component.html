@@ -1,0 +1,36 @@
+<nav>
+  <ul class="host-env-box">
+    <li *ngFor="let env of envs;">
+      <span>{{env.name}}</span>
+      <p-inputSwitch onLabel="__" offLabel="__" [(ngModel)]="env.isActived" (onChange)="envChange(env,$event)"></p-inputSwitch>
+    </li>
+  </ul>
+  <div class="ui-btn-bar">
+    <button pButton (click)="textMode ? saveHostsText() : switchTextMode()" [label]="textMode ? '保存' : '文本'"></button>
+    <button pButton (click)="reload()" label="刷新"></button>
+    <button pButton label="帮助" (click)="op.toggle($event)" class="button-help"></button>
+  </div>
+</nav>
+<main>
+  <table *ngIf="!textMode">
+    <tr *ngFor="let rule of rules; trackBy rule?.id;">
+      <td class="sharp" [class.actived]="rule.isActived" (click)="toggleRuleActive(rule)">#</td>
+      <td class="ip">{{rule.address.correct}}
+        <span class="fa" [class.fa-spinner]="rule.isAddrAliveChecking" [class.fa-thumbs-up]="!rule.isAddrAliveChecking" [class.invalid]="!rule.isAddrAlive"></span>
+      </td>
+      <td class="domain">{{rule.domain}}</td>
+      <td class="env-name">{{rule.envName}}</td>
+      <td class="validation">
+        <span *ngIf="rule.isActived" class="fa" [class.fa-spinner]="rule.isRuleValidChecking" [class.fa-circle]="!rule.isRuleValidChecking" [class.invalid]="!rule.isRuleValid"></span>
+      </td>
+    </tr>
+  </table>
+  <textarea *ngIf="textMode" [(ngModel)]="hostsText"></textarea>
+</main>
+
+<p-growl [(value)]="msgs"></p-growl>
+<p-overlayPanel #op>
+  <div class="box-help">
+    <a href="mailto:mxx@vip.qq.com" class="report-bug fa fa-envelope-o" title="For best tools, Email me"></a>
+  </div>
+</p-overlayPanel>

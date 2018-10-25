@@ -40,6 +40,7 @@
     "@angular/animations": "^7.0.1",
     "@angular/cdk": "^7.0.1",
     "@angular/flex-layout": "^6.0.0-beta.16",
+    "@types/uglify-js": "^3.0.4",
     "electron-store": "^2.0.0",
     "electron-sudo": "^4.0.12",
     "font-awesome": "^4.7.0",
@@ -47,7 +48,8 @@
     "ip-address": "^5.8.9",
     "jsoneditor": "^5.24.7",
     "ng2-ace-editor": "^0.3.8",
-    "primeng": "^6.1.5"
+    "primeng": "^6.1.5",
+    "uglify-js": "^3.4.9"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.6.3",
