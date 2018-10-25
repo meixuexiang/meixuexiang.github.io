@@ -25,10 +25,10 @@
     "build": "npm run postinstall:electron && npm run electron:serve-tsc && ng build",
     "build:dev": "npm run build -- -c dev",
     "build:prod": "npm run build -- -c production",
-    "ng:serve": "ng serve",
+    "ng:serve": "ng serve --port=4210",
     "ng:serve:web": "npm run postinstall:web && ng serve -o",
     "electron:serve-tsc": "tsc -p tsconfig-serve.json",
-    "electron:serve": "wait-on http-get://localhost:4200/ && npm run electron:serve-tsc && electron . --serve",
+    "electron:serve": "wait-on http-get://localhost:4210/ && npm run electron:serve-tsc && electron . --serve",
     "electron:local": "npm run build:prod && electron .",
     "electron:linux": "npm run build:prod && npx electron-builder build --linux",
     "electron:windows": "npm run build:prod && npx electron-builder build --windows",
@@ -37,6 +37,14 @@
     "e2e": "npm run postinstall:web && ng e2e"
   },
   "dependencies": {
+    "electron-store": "^2.0.0",
+    "electron-sudo": "^4.0.12",
+    "font-awesome": "^4.7.0",
+    "fuse.js": "^3.3.0",
+    "ip-address": "^5.8.9",
+    "jsoneditor": "^5.24.7",
+    "ng2-ace-editor": "^0.3.8",
+    "primeng": "^6.1.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.6.3",

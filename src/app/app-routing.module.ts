@@ -1,16 +1,16 @@
-import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LaunchpadComponent } from './launchpad/launchpad.component';
 
 const routes: Routes = [
     {
         path: '',
-        component: HomeComponent
+        component: LaunchpadComponent
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {useHash: true})],
+    imports: [RouterModule.forRoot(routes, { useHash: true })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }
