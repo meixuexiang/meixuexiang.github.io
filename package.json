@@ -37,6 +37,9 @@
     "e2e": "npm run postinstall:web && ng e2e"
   },
   "dependencies": {
+    "@angular/animations": "^7.0.1",
+    "@angular/cdk": "^7.0.1",
+    "@angular/flex-layout": "^6.0.0-beta.16",
     "electron-store": "^2.0.0",
     "electron-sudo": "^4.0.12",
     "font-awesome": "^4.7.0",

@@ -1,0 +1,63 @@
+<div fxLayout="row" fxFlex class="box-in-out">
+  <dl fxLayout="column" fxFlex="50%" class="box-in">
+    <dt>文本内容：</dt>
+    <dd fxFlex>
+      <textarea pInputTextarea [(ngModel)]="source" (input)="onInput('source')"></textarea>
+    </dd>
+  </dl>
+  <dl fxLayout="column" fxFlex="50%" class="box-out">
+    <dt>{{action | uppercase}} 结果：{{action === 'replace' ? '' : matchNumbers}}</dt>
+    <dd fxFlex>
+      <textarea pInputTextarea [(ngModel)]="output"></textarea>
+    </dd>
+  </dl>
+</div>
+
+<div fxLayout="row" class="box-edit">
+  <p-selectButton [options]="flagOptions" [(ngModel)]="flags" multiple="multiple" (onChange)="onInput('flags')"></p-selectButton>
+  <span fxFlex="auto" class="ui-float-label">
+    <input type="text" [(ngModel)]="pattern" (input)="onInput('pattern')" pInputText>
+    <label for="float-input">正则：</label>
+  </span>
+</div>
+
+<div fxLayout="row" class="box-edit">
+  <p-selectButton [options]="replacementTypeOptions" [(ngModel)]="replacementType" (onChange)="onInput('replacementType')"></p-selectButton>
+  <span *ngIf="replacementType === 's'" fxFlex="auto" class="ui-float-label">
+    <input type="text" pInputText [(ngModel)]="replacementString" (input)="onInput('replacementString')">
+    <label for="float-input">替换：</label>
+  </span>
+  <div *ngIf="replacementType === 'f'" fxFlex="auto" class="ui-float-label">
+    <textarea pInputTextarea [(ngModel)]="replacementFunc" (input)="onInput('replacementFunc')"></textarea>
+  </div>
+</div>
+
+<div class="ui-btn-bar">
+  <button pButton (click)="action = 'exec'; onInput('source')" label="Exec"> </button>
+  <button pButton (click)="action = 'match'; onInput('source')" label="Match"></button>
+  <button pButton (click)="action = 'replace'; onInput('source')" label="Replace"></button>
+  <button pButton (click)="copyL2R()" label="L←R"></button>
+  <button pButton (click)="reset()" label="Reset"></button>
+  <button pButton label="帮助" (click)="op.toggle($event)" class="button-help"></button>
+  <a href="mailto:mxx@vip.qq.com" class="report-bug fa fa-envelope-o" title="For best tools, Email me"></a>
+</div>
+
+<p-growl [(value)]="msgs"></p-growl>
+<p-overlayPanel #op>
+  <div class="box-help">
+    <ul>
+      <li>
+        <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank">MDN web docs -- RegExp</a>
+      </li>
+      <li>
+        <a href="http://www.jb51.net/tools/regex.htm" target="_blank">常用正则表达式, 如何写出高效率的正则表达式</a>
+      </li>
+      <li>
+        <a href="http://www.jb51.net/tools/zhengze.html" target="_blank">正则表达式30分钟入门教程</a>
+      </li>
+      <li>
+        <a href="https://zhuanlan.zhihu.com/p/20693609" target="_blank">从正则表达式(RE)到最小确定性有限状态自动机(DFA)</a>
+      </li>
+    </ul>
+  </div>
+</p-overlayPanel>

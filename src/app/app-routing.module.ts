@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LaunchpadComponent } from './launchpad/launchpad.component';
+import { LaunchpadComponent, routes } from './launchpad/launchpad.component';
 
-const routes: Routes = [
+const matchOthers: Routes = [
     {
-        path: '',
+        path: 'launchpad',
         component: LaunchpadComponent
-    }
+    },
+    {
+        path: '**',
+        pathMatch: 'full',
+        component: LaunchpadComponent
+    },
 ];
+const allRoutes: Routes = [...routes, ...matchOthers];
+console.log(allRoutes);
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { useHash: true })],
+    imports: [RouterModule.forRoot(allRoutes, { useHash: true, enableTracing: true })],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }
