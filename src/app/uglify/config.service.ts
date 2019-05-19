@@ -239,11 +239,11 @@ export class ConfigService {
             title:
               'drop unreferenced functions and variables (simple direct variable assignments do not count as references unless set to "keep_assign")'
           }),
-          new BooleanItem({
-            key: 'warnings',
-            value: false,
-            title: 'display warnings when dropping unreachable code or unused declarations etc.'
-          })
+          // new BooleanItem({
+          //   key: 'warnings',
+          //   value: false,
+          //   title: 'display warnings when dropping unreachable code or unused declarations etc.'
+          // })
         ]
       }),
       new JsonBoolItem({
