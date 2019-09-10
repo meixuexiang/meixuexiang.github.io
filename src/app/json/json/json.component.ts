@@ -39,8 +39,8 @@ interface JsonEditorOptions {
   styleUrls: ['./json.component.scss']
 })
 export class JsonComponent implements OnInit {
-  @ViewChild('textElem') textElem: ElementRef;
-  @ViewChild('treeElem') treeElem: ElementRef;
+  @ViewChild('textElem', { static: true }) textElem: ElementRef;
+  @ViewChild('treeElem', { static: true }) treeElem: ElementRef;
 
   editorText: JSONEditor;
   editorTree: JSONEditor;
@@ -74,7 +74,7 @@ export class JsonComponent implements OnInit {
         if (this.data) {
           this.editorTree.set(this.data);
         }
-      } catch (error) {}
+      } catch (error) { }
     };
     this.editorTreeOptions.onChange = () => {
       try {
@@ -82,7 +82,7 @@ export class JsonComponent implements OnInit {
         if (this.data) {
           this.editorText.set(this.data);
         }
-      } catch (error) {}
+      } catch (error) { }
     };
   }
 

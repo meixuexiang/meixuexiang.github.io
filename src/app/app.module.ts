@@ -1,24 +1,19 @@
 import 'reflect-metadata';
 import '../polyfills';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 
 import { AppRoutingModule } from './app-routing.module';
 
-// NG Translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { ElectronService } from './providers/electron.service';
-
-import { WebviewDirective } from './directives/webview.directive';
-
 import { AppComponent } from './app.component';
 import { LaunchpadComponent } from './launchpad/launchpad.component';
+import { ElectronService } from './core/services';
 
 // AoT requires an exported function for factories
 // export function HttpLoaderFactory(http: HttpClient) {
@@ -28,7 +23,6 @@ import { LaunchpadComponent } from './launchpad/launchpad.component';
 @NgModule({
   declarations: [
     AppComponent,
-    WebviewDirective,
     LaunchpadComponent
   ],
   imports: [
@@ -36,6 +30,8 @@ import { LaunchpadComponent } from './launchpad/launchpad.component';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    CoreModule,
+    SharedModule,
     AppRoutingModule,
     // TranslateModule.forRoot({
     //   loader: {

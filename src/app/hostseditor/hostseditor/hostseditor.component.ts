@@ -3,7 +3,7 @@ import { Message } from 'primeng/primeng';
 import { MessageService } from 'primeng/components/common/messageservice';
 
 import { Address4, Address6 } from 'ip-address';
-import { ElectronService } from '../../providers/electron.service';
+import { ElectronService } from '../../core/services/electron/electron.service';
 import { HostsService } from '../hosts.service';
 debugger;
 interface Env {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElectronService } from '../providers/electron.service';
+import { ElectronService } from '../core/services/electron/electron.service';
 
 
 @Injectable()

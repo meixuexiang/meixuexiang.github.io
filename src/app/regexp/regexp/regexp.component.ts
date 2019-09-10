@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem, Message } from 'primeng/primeng';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { ElectronService } from '../../providers/electron.service';
+import { ElectronService } from '../../core/services/electron/electron.service';
 
 @Component({
   selector: 'app-regexp',

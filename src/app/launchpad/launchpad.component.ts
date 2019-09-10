@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes } from '@angular/router';
-import { ElectronService } from '../providers/electron.service';
+import { ElectronService } from '../core/services/electron/electron.service';
 import * as Fuse from 'fuse.js';
 
 export const routes: Routes = [
@@ -129,10 +129,13 @@ export class LaunchpadComponent implements OnInit {
     event.stopPropagation();
     const BrowserWindow = this.es.remote.BrowserWindow;
 
-    let win = new BrowserWindow({ width, height });
-    win.on('close', function () {
-      win = null;
+    let win = new BrowserWindow({
+      width, height,
+      webPreferences: {
+        nodeIntegration: true,
+      }
     });
+    win.on('close', () => win = null);
     const targetURL = `${location.origin}/#/${url}`;
     win.loadURL(targetURL);
     console.log(`Opening: `, targetURL);

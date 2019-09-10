@@ -4,7 +4,7 @@ import { Message } from 'primeng/primeng';
 import { MessageService } from 'primeng/components/common/messageservice';
 
 import { ItemBase, ConfigService } from '../config.service';
-import { ElectronService } from '../../providers/electron.service';
+import { ElectronService } from '../../core/services/electron/electron.service';
 // import * as UglifyJS from 'uglify-js/tools/node';
 // const UglifyJS = require('uglify-js/tools/node');
 
@@ -84,7 +84,7 @@ function dingSuo_v() { //定朔计算速度测试
   parse() {
     this._parse();
     console.log(this.ast);
-    if (this.es.electron) {
+    if (this.es.isElectron) {
       this.es.remote.getCurrentWebContents().openDevTools();
     } else {
       this.messageService.add({
