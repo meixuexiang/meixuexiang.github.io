@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes } from '@angular/router';
+import { Route, Routes } from '@angular/router';
 import { ElectronService } from '../core/services/electron/electron.service';
 import * as Fuse from 'fuse.js';
 
@@ -136,10 +136,11 @@ export class LaunchpadComponent implements OnInit {
       }
     });
     win.on('close', () => win = null);
-    const targetURL = `${location.origin}/#/${url}`;
+    const targetURL = `${location.href}${url}`;
     win.loadURL(targetURL);
     console.log(`Opening: `, targetURL);
     win.show();
   }
 
+  trackByPath(index: number, item: Route) { return item.path; }
 }

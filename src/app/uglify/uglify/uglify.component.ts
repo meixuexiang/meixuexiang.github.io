@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Message } from 'primeng/primeng';
+import { Message } from 'primeng/components/common/api.d';
 import { MessageService } from 'primeng/components/common/messageservice';
 
 import { ItemBase, ConfigService } from '../config.service';

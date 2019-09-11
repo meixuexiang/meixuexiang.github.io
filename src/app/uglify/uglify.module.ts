@@ -4,19 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UglifyComponent } from './uglify/uglify.component';
-import {
-  // PanelModule,
-  // PanelMenuModule,
-  SidebarModule,
-  InputTextareaModule,
-  // SelectButtonModule,
-  ButtonModule,
-  GrowlModule,
-  // AutoCompleteModule,
-  // OverlayPanelModule,
-  TooltipModule,
-  FileUploadModule
-} from 'primeng/primeng';
+import { SidebarModule } from 'primeng/components/sidebar/sidebar';
+import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
+import { ButtonModule } from 'primeng/components/button/button';
+import { GrowlModule } from 'primeng/components/growl/growl';
+import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { FileUploadModule } from 'primeng/components/fileupload/fileupload';
 import { OptionsComponent } from './options/options.component';
 import { ConfigService } from './config.service';
 
@@ -26,15 +19,10 @@ import { ConfigService } from './config.service';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    // PanelModule,
-    // PanelMenuModule,
     SidebarModule,
     InputTextareaModule,
-    // SelectButtonModule,
     ButtonModule,
     GrowlModule,
-    // AutoCompleteModule,
-    // OverlayPanelModule,
     TooltipModule,
     FileUploadModule,
     RouterModule.forChild([{ path: '', pathMatch: 'full', component: UglifyComponent }])
@@ -42,4 +30,4 @@ import { ConfigService } from './config.service';
   declarations: [UglifyComponent, OptionsComponent],
   providers: [ConfigService]
 })
-export class UglifyModule {}
+export class UglifyModule { }

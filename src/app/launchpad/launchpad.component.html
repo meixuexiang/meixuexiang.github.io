@@ -5,7 +5,7 @@
   </p>
 </header>
 <main routerLink="/">
-  <div *ngFor="let r of routes; trackBy r?.path" class="app-icon-box">
+  <div *ngFor="let r of routes; trackBy: trackByPath" class="app-icon-box">
     <a [routerLink]="" (click)="openURL($event, r.path, r['data']['width'], r['data']['height'])" [class]="r['data']['className']"></a>
     <p>{{r['data']['name']}}</p>
   </div>
