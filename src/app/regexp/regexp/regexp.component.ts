@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem, Message } from 'primeng/components/common/api.d';
-import { MessageService } from 'primeng/components/common/messageservice';
+import { SelectItem, Message } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { ElectronService } from '../../core/services/electron/electron.service';
 
 @Component({

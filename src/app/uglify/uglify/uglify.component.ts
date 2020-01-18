@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Message } from 'primeng/components/common/api.d';
-import { MessageService } from 'primeng/components/common/messageservice';
+import { Message } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 import { ItemBase, ConfigService } from '../config.service';
 import { ElectronService } from '../../core/services/electron/electron.service';

@@ -4,12 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { UglifyComponent } from './uglify/uglify.component';
-import { SidebarModule } from 'primeng/components/sidebar/sidebar';
-import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
-import { ButtonModule } from 'primeng/components/button/button';
-import { GrowlModule } from 'primeng/components/growl/growl';
-import { TooltipModule } from 'primeng/components/tooltip/tooltip';
-import { FileUploadModule } from 'primeng/components/fileupload/fileupload';
+import { SidebarModule } from 'primeng/sidebar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { TooltipModule } from 'primeng/tooltip';
+import { FileUploadModule } from 'primeng/fileupload';
 import { OptionsComponent } from './options/options.component';
 import { ConfigService } from './config.service';
 
@@ -22,7 +22,7 @@ import { ConfigService } from './config.service';
     SidebarModule,
     InputTextareaModule,
     ButtonModule,
-    GrowlModule,
+    ToastModule,
     TooltipModule,
     FileUploadModule,
     RouterModule.forChild([{ path: '', pathMatch: 'full', component: UglifyComponent }])

@@ -4,19 +4,18 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HostseditorComponent } from './hostseditor/hostseditor.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-// import { GrowlModule, ButtonModule, OverlayPanelModule, InputSwitchModule } from 'primeng/primeng';
 
-import { GrowlModule } from 'primeng/components/growl/growl';
-import { ButtonModule } from 'primeng/components/button/button';
-import { OverlayPanelModule } from 'primeng/components/overlaypanel/overlaypanel';
-import { InputSwitchModule } from 'primeng/components/inputswitch/inputswitch';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     FlexLayoutModule,
-    GrowlModule,
+    ToastModule,
     ButtonModule,
     OverlayPanelModule,
     InputSwitchModule,
