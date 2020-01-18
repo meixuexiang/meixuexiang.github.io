@@ -18,7 +18,7 @@ export class ElectronService {
   fs: typeof fs;
   util: typeof util;
 
-  get isElectron() {
+  get isElectron(): boolean {
     return window && window.process && window.process.type;
   }
 

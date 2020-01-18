@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ElectronService } from '../core/services/electron/electron.service';
 
+// import sudo from 'sudo-prompt';
+const sudo = require('sudo-prompt');
+const options = {
+  name: 'valley',
+};
 
 @Injectable()
 export class HostsService {
@@ -8,8 +13,6 @@ export class HostsService {
   charset = 'utf-8';
 
   fs: any;
-  readFile: any;
-  writeFile: any;
 
   constructor(private es: ElectronService) {
     this.hostsPath = this.sysHostsPath();
@@ -21,7 +24,7 @@ export class HostsService {
     if (process.platform === 'win32') {
       return path.join(process.env.SYSTEMROOT, './system32/drivers/etc/hosts');
     }
-    return '/etc/hosts';
+    return '/private/etc/hosts';
   }
 
   read(): Promise<[Error | null, string]> {
@@ -32,7 +35,11 @@ export class HostsService {
 
   write(hostsText: string): Promise<[Error | null]> {
     return new Promise((resolve, reject) => {
-      this.fs.writeFile(this.hostsPath, hostsText, this.charset, (err) => resolve([err]));
+      const cmd = `echo -e '${hostsText}' > /private/etc/hosts`;
+      sudo.exec(cmd, options, function (err, stdout, stderr) {
+        if (err) throw err;
+        resolve([err])
+      });
     });
   }
 }
