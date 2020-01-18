@@ -270,24 +270,38 @@ export class HostseditorComponent implements OnInit {
   async save() {
     const [err] = await this.hosts.write(this.serialization(this.rules));
     if (err) {
-      return this.messageService.add({ severity: 'error', detail: err.message });
+      this.messageService.add({ severity: 'error', detail: err.message });
+      return false;
     }
     this.messageService.add({ severity: 'success', detail: '修改成功' });
+    return true;
   }
 
   async toggleRuleActive(rule: Rule) {
     rule.isActived = !rule.isActived;
     this.envs = this.genEnvs();
-    await this.save();
-    if (rule.isActived) {
-      this.lookupAll([rule]);
+    const result = await this.save();
+
+    if (result) {
+      if (rule.isActived) {
+        this.lookupAll([rule]);
+      }
+    } else {
+      rule.isActived = !rule.isActived;
+      this.envs = this.genEnvs();
     }
   }
 
   async envChange(env: Env, event) {
     const changedRules = this.rules.filter(r => r.envName === env.name);
     changedRules.forEach(rule => (rule.isActived = env.isActived));
-    await this.save();
-    this.lookupAll(changedRules);
+    const result = await this.save();
+
+    if (result) {
+      this.lookupAll(changedRules);
+    } else {
+      env.isActived = !env.isActived;
+      changedRules.forEach(rule => (rule.isActived = env.isActived));
+    }
   }
 }

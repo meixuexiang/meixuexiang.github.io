@@ -37,7 +37,7 @@ export class HostsService {
     return new Promise((resolve, reject) => {
       const cmd = `echo -e '${hostsText}' > /private/etc/hosts`;
       sudo.exec(cmd, options, function (err, stdout, stderr) {
-        if (err) throw err;
+        // if (err) throw err;
         resolve([err])
       });
     });
