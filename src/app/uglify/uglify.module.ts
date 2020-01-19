@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { UglifyComponent } from './uglify/uglify.component';
-import { SidebarModule } from 'primeng/sidebar';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { ButtonModule } from 'primeng/button';
-import { ToastModule } from 'primeng/toast';
-import { TooltipModule } from 'primeng/tooltip';
-import { FileUploadModule } from 'primeng/fileupload';
 import { OptionsComponent } from './options/options.component';
 import { ConfigService } from './config.service';
 
@@ -19,12 +18,11 @@ import { ConfigService } from './config.service';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    SidebarModule,
-    InputTextareaModule,
-    ButtonModule,
-    ToastModule,
-    TooltipModule,
-    FileUploadModule,
+    OverlayModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatTooltipModule,
     RouterModule.forChild([{ path: '', pathMatch: 'full', component: UglifyComponent }])
   ],
   declarations: [UglifyComponent, OptionsComponent],

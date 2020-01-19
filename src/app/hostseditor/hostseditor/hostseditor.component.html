@@ -2,13 +2,14 @@
   <ul class="host-env-box">
     <li *ngFor="let env of envs;">
       <span>{{env.name}}</span>
-      <p-inputSwitch onLabel="__" offLabel="__" [(ngModel)]="env.isActived" (onChange)="envChange(env,$event)"></p-inputSwitch>
+      <mat-slide-toggle [checked]="env.isActived" (change)="envChange(env,$event)"></mat-slide-toggle>
     </li>
   </ul>
   <div class="ui-btn-bar">
-    <button pButton (click)="textMode ? saveHostsText() : switchTextMode()" [label]="textMode ? '保存' : '文本'"></button>
-    <button pButton (click)="reload()" label="刷新"></button>
-    <button pButton label="帮助" (click)="op.toggle($event)" class="button-help"></button>
+    <button mat-flat-button (click)="textMode ? saveHostsText() : switchTextMode()">{{textMode ? '保存' : '文本'}}</button>
+    <button mat-flat-button (click)="reload()">刷新</button>
+    <button mat-flat-button (click)="isHelpOverlayOpen = !isHelpOverlayOpen" class="button-help"
+      #help="cdkOverlayOrigin" cdkOverlayOrigin>帮助</button>
   </div>
 </nav>
 <main>
@@ -16,21 +17,25 @@
     <tr *ngFor="let rule of rules; trackBy rule?.id;">
       <td class="sharp" [class.actived]="rule.isActived" (click)="toggleRuleActive(rule)">#</td>
       <td class="ip">{{rule.address.correct}}
-        <span class="fa" [class.fa-spinner]="rule.isAddrAliveChecking" [class.fa-thumbs-up]="!rule.isAddrAliveChecking" [class.invalid]="!rule.isAddrAlive"></span>
+        <span class="fa" [class.fa-spinner]="rule.isAddrAliveChecking" [class.fa-thumbs-up]="!rule.isAddrAliveChecking"
+          [class.invalid]="!rule.isAddrAlive"></span>
       </td>
       <td class="domain">{{rule.domain}}</td>
       <td class="env-name">{{rule.envName}}</td>
       <td class="validation">
-        <span *ngIf="rule.isActived" class="fa" [class.fa-spinner]="rule.isRuleValidChecking" [class.fa-circle]="!rule.isRuleValidChecking" [class.invalid]="!rule.isRuleValid"></span>
+        <span *ngIf="rule.isActived" class="fa" [class.fa-spinner]="rule.isRuleValidChecking"
+          [class.fa-circle]="!rule.isRuleValidChecking" [class.invalid]="!rule.isRuleValid"></span>
       </td>
     </tr>
   </table>
   <textarea *ngIf="textMode" [(ngModel)]="hostsText"></textarea>
 </main>
 
-<p-toast></p-toast>
-<p-overlayPanel #op>
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayFlexibleDimensions]="true" [cdkConnectedOverlayOrigin]="help"
+  [cdkConnectedOverlayOpen]="isHelpOverlayOpen" (backdropClick)="closeHelpOverlay()"
+  [cdkConnectedOverlayMinWidth]="'100%'" [cdkConnectedOverlayPositions]="overlayPosition"
+  [cdkConnectedOverlayPanelClass]="'options-panel'">
   <div class="box-help">
     <a href="mailto:mxx@vip.qq.com" class="report-bug fa fa-envelope-o" title="For best tools, Email me"></a>
   </div>
-</p-overlayPanel>
+</ng-template>

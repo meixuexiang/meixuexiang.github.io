@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Message } from 'primeng/api';
-import { MessageService } from 'primeng/api';
-
 import { Address4, Address6 } from 'ip-address';
 import { ElectronService } from '../../core/services/electron/electron.service';
 import { HostsService } from '../hosts.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 interface Env {
   name: string;
   isActived: boolean;
@@ -26,12 +24,11 @@ interface Rule {
   selector: 'app-hostseditor',
   templateUrl: './hostseditor.component.html',
   styleUrls: ['./hostseditor.component.scss'],
-  providers: [HostsService, MessageService]
+  providers: [HostsService]
 })
 export class HostseditorComponent implements OnInit {
   rules: Rule[] = [];
   envs: Env[] = [];
-  msgs: Message[] = [];
   _id = 1000;
   hostsText: string;
   _hostsText: string;
@@ -39,11 +36,14 @@ export class HostseditorComponent implements OnInit {
 
   dns: any;
   child_process: any;
+  snackBarOption: MatSnackBarConfig = { duration: 1800, horizontalPosition: 'end', verticalPosition: 'top' };
+  isHelpOverlayOpen = false;
+  overlayPosition = [{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' }];
 
   constructor(
-    private messageService: MessageService,
     private hosts: HostsService,
-    private es: ElectronService
+    private es: ElectronService,
+    private snackBar: MatSnackBar
   ) {
     this.dns = es.remote.require('dns');
     this.child_process = es.remote.require('child_process');
@@ -56,7 +56,7 @@ export class HostseditorComponent implements OnInit {
   async reload(isInit: boolean = false) {
     const [err, text] = await this.hosts.read();
     if (err) {
-      return this.messageService.add({ severity: 'error', detail: err.message });
+      return this.snackBar.open(err.message, '', this.snackBarOption);
     }
     if (this.textMode) {
       this.hostsText = text;
@@ -67,7 +67,7 @@ export class HostseditorComponent implements OnInit {
       this.pingAll();
     }
     if (!isInit) {
-      this.messageService.add({ severity: 'success', detail: '刷新成功' });
+      this.snackBar.open('刷新成功', '', this.snackBarOption);
     }
   }
 
@@ -220,7 +220,7 @@ export class HostseditorComponent implements OnInit {
     }
     const [err] = await this.hosts.write(this.hostsText);
     if (err) {
-      return this.messageService.add({ severity: 'error', detail: err.message });
+      return this.snackBar.open(err.message, '', this.snackBarOption);
     }
     this.switchTextMode();
     this.reload();
@@ -229,7 +229,7 @@ export class HostseditorComponent implements OnInit {
   async switchTextMode() {
     const [err, text] = await this.hosts.read();
     if (err) {
-      return this.messageService.add({ severity: 'error', detail: err.message });
+      return this.snackBar.open(err.message, '', this.snackBarOption);
     }
     const hostsText = this._hostsText = this.hostsText = text;
     this.textMode = !this.textMode;
@@ -270,10 +270,10 @@ export class HostseditorComponent implements OnInit {
   async save() {
     const [err] = await this.hosts.write(this.serialization(this.rules));
     if (err) {
-      this.messageService.add({ severity: 'error', detail: err.message });
+      this.snackBar.open(err.message, '', this.snackBarOption);
       return false;
     }
-    this.messageService.add({ severity: 'success', detail: '修改成功' });
+    this.snackBar.open('修改成功', '', this.snackBarOption);
     return true;
   }
 
@@ -294,6 +294,7 @@ export class HostseditorComponent implements OnInit {
 
   async envChange(env: Env, event) {
     const changedRules = this.rules.filter(r => r.envName === env.name);
+    env.isActived = !env.isActived;
     changedRules.forEach(rule => (rule.isActived = env.isActived));
     const result = await this.save();
 
@@ -303,5 +304,9 @@ export class HostseditorComponent implements OnInit {
       env.isActived = !env.isActived;
       changedRules.forEach(rule => (rule.isActived = env.isActived));
     }
+  }
+
+  closeHelpOverlay() {
+    this.isHelpOverlayOpen = false;
   }
 }

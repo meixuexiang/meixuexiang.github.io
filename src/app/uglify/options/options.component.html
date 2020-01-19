@@ -2,20 +2,32 @@
   <dt>{{groupName ? groupName : 'minify Options'}}</dt>
   <dd *ngFor="let item of items;">
     <ng-container [ngSwitch]="item['ctrlType']">
-      <label *ngSwitchCase="'checkbox'" pTooltip="{{item.title}}" tooltipStyleClass="tooltip">
-        <input [formControlName]="item.key" [id]="item.key" type="checkbox">{{item.key}}</label>
-      <label *ngSwitchCase="'number'" pTooltip="{{item.title}}" tooltipStyleClass="tooltip">
-        <input [formControlName]="item.key" [id]="item.key" type="number" [min]="item['min']" [max]="item['max']">{{item.key}}</label>
-      <label *ngSwitchCase="'text'" pTooltip="{{item.title}}" tooltipStyleClass="tooltip">
-        <input [formControlName]="item.key" [id]="item.key" type="text">{{item.key}}</label>
-      <label *ngSwitchCase="'jsonbool'" pTooltip="{{item.title}}" tooltipStyleClass="tooltip">
-        <input [formControlName]="item.key" [id]="item.key" type="checkbox">{{item.key}}</label>
-      <label *ngSwitchCase="'jsonstring'" pTooltip="{{item.title}}" tooltipStyleClass="tooltip">
-        <input [formControlName]="item.key" [id]="item.key" type="text">{{item.key}}</label>
+      <ng-container *ngSwitchCase="'checkbox'">
+        <label matTooltip="{{item.title}}"><input [formControlName]="item.key" [id]="item.key"
+            type="checkbox">{{item.key}}</label>
+      </ng-container>
+      <ng-container *ngSwitchCase="'number'">
+        <label matTooltip="{{item.title}}">
+          <input [formControlName]="item.key" [id]="item.key" type="number" [min]="item['min']"
+            [max]="item['max']">{{item.key}}</label>
+      </ng-container>
+      <ng-container *ngSwitchCase="'text'">
+        <label matTooltip="{{item.title}}">
+          <input [formControlName]="item.key" [id]="item.key" type="text">{{item.key}}</label>
+      </ng-container>
+      <ng-container *ngSwitchCase="'jsonbool'">
+        <label matTooltip="{{item.title}}">
+          <input [formControlName]="item.key" [id]="item.key" type="checkbox">{{item.key}}</label>
+      </ng-container>
+      <ng-container *ngSwitchCase="'jsonstring'">
+        <label matTooltip="{{item.title}}">
+          <input [formControlName]="item.key" [id]="item.key" type="text">{{item.key}}</label>
+      </ng-container>
     </ng-container>
   </dd>
 </dl>
 <ng-container *ngFor="let item of items;">
-  <app-options *ngIf="item['childItems'] && item['childItems'].length && form.controls[item.key].value" [items]="item['childItems']"
-    [form]="form.controls[item.key + 'Options']" [groupName]="item.key + ' Options'"></app-options>
+  <app-options *ngIf="item['childItems'] && item['childItems'].length && form.controls[item.key].value"
+    [items]="item['childItems']" [form]="form.controls[item.key + 'Options']" [groupName]="item.key + ' Options'">
+  </app-options>
 </ng-container>

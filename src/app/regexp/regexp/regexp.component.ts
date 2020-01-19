@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem, Message } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 import { ElectronService } from '../../core/services/electron/electron.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-regexp',
   templateUrl: './regexp.component.html',
-  styleUrls: ['./regexp.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./regexp.component.scss']
 })
 export class RegexpComponent implements OnInit {
-  flagOptions: SelectItem[] = [{ label: 'G', value: 'g' }, { label: 'I', value: 'i' }, { label: 'M', value: 'm' }];
-  replacementTypeOptions: SelectItem[] = [{ label: 'String', value: 's' }, { label: 'Function', value: 'f' }];
   fnTemplate = `function ($0${this.genParamsFromReg()}){\r\n  //console.log(this);\r\n  //code here\r\n  \r\n  return $0;\r\n}`;
 
   action: string;
@@ -30,16 +26,18 @@ export class RegexpComponent implements OnInit {
   replacementFunc: string;
   repFunc: any;
   repFuncError: Error;
+  snackBarOption: MatSnackBarConfig = { duration: 1800, horizontalPosition: 'end', verticalPosition: 'top' };
+  isHelpOverlayOpen = false;
+  overlayPosition = [{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' }];
 
-  msgs: Message[] = [];
-
-  constructor(private messageService: MessageService, public es: ElectronService) {
+  constructor(
+    public es: ElectronService,
+    private snackBar: MatSnackBar
+  ) {
     this.reset();
   }
 
-  ngOnInit() {
-    // this.source = this.reset.toString();
-  }
+  ngOnInit() { }
 
   reset() {
     this.action = 'exec';
@@ -69,14 +67,20 @@ export class RegexpComponent implements OnInit {
     }
   }
 
-  onInput(type: string) {
+  onInput(type: string, evt?) {
     if (type === 'source') {
     } else if (type === 'flags' || type === 'pattern') {
+      if (evt) {
+        this.flags = evt.value;
+      }
       this.buildRegExp();
       if (this.regexp && this.replacementType === 'f') {
         this.attempInjectArgs();
       }
     } else if (type === 'replacementType') {
+      if (evt) {
+        this.replacementType = evt.value;
+      }
       this.action = 'replace';
       if (this.replacementType === 'f') {
         this.attempInjectArgs();
@@ -88,6 +92,7 @@ export class RegexpComponent implements OnInit {
       this.action = 'replace';
       this.buildRepFunc();
     }
+    console.log('onInput', evt, this.flags, this.replacementType);
 
     if (this.regexpError) {
       if (this.pattern) {
@@ -167,6 +172,10 @@ export class RegexpComponent implements OnInit {
 
   copyL2R() {
     this.source = this.output;
-    this.messageService.add({ severity: 'success', detail: 'Copied!' });
+    this.snackBar.open('Copied!', '', this.snackBarOption);
+  }
+
+  closeHelpOverlay() {
+    this.isHelpOverlayOpen = false;
   }
 }

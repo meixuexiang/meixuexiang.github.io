@@ -1,95 +1,116 @@
 :host {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    background: rgba(255, 255, 255, 0.8);
-  }
-  
-  input,
-  textarea {
-    font-family: monospace, Monaco, 'Lucida Console';
-  }
-  
-  .box-in-out textarea {
-    width: 100%;
-    height: 100%;
-    resize: none;
-    background: rgba(255, 255, 255, 0.8);
-  }
-  
-  .box-in-out dt {
-    line-height: 20px;
-  }
-  
-  .box-in {
-    margin-right: 2px;
-  }
-  
-  .box-out {
-    margin-left: 2px;
-  }
-  
-  .container .ui-panel .ui-panel-content {
-    padding: 0;
-  }
-  
-  .container .ui-panel .ui-panel-footer {
-    margin-top: 20px;
-  }
-  
-  .box-edit {
-    margin: 16px 0 0 0;
-  }
-  
-  .ui-float-label input {
-    width: 100%;
-    line-height: 18px;
-    font-size: 14px;
-  }
-  
-  .ui-float-label textarea {
-    display: block;
-    width: 100%;
-    height: 100px;
-  }
-  
-  .box-edit p-selectButton {
-    width: 160px;
-    text-align: center;
-    /* margin: 18px 0 0 0; */
-  }
-  
-  .ui-btn-bar {
-    display: block;
-    margin-top: 16px;
-    text-align: center;
-  }
-  
-  .ui-btn-bar button {
-    padding: 3px 6px;
-    font-size: 14px;
-  }
-  
-  .titlebar-toolbox {
-    float: right;
-  }
-  
-  .box-help {
-    width: 320px;
-  }
-  
-  .box-help ul {
-    list-style: none;
-  }
-  
-  .box-help ul li {
-    margin: 4px;
-  }
-  
-  .report-bug {
-    float: right;
-    margin-top: 8px;
-  }
-  
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+input,
+textarea {
+  font-family: monospace, Monaco, "Lucida Console";
+}
+
+.box-in-out textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px;
+}
+
+.box-in-out dt {
+  line-height: 20px;
+}
+
+.box-in {
+  margin-right: 2px;
+}
+
+.box-out {
+  margin-left: 2px;
+}
+
+.container .ui-panel .ui-panel-content {
+  padding: 0;
+}
+
+.container .ui-panel .ui-panel-footer {
+  margin-top: 20px;
+}
+
+.box-edit {
+  margin: 0 0 0 0;
+}
+
+.ui-float-label input {
+  width: 100%;
+  line-height: 18px;
+  font-size: 14px;
+}
+
+.ui-float-label textarea {
+  display: block;
+  width: 100%;
+  height: 100px;
+}
+
+.box-edit p-selectButton {
+  width: 160px;
+  text-align: center;
+  /* margin: 18px 0 0 0; */
+}
+
+.ui-btn-bar {
+  display: block;
+  // margin-top: 16px;
+  text-align: center;
+}
+
+.ui-btn-bar button {
+  padding: 0px 6px;
+  font-size: 14px;
+  margin: 0 3px;
+}
+
+.titlebar-toolbox {
+  float: right;
+}
+
+.box-help {
+  width: 320px;
+}
+
+.box-help ul {
+  list-style: none;
+}
+
+.box-help ul li {
+  margin: 4px;
+}
+
+.report-bug {
+  float: right;
+  margin-top: 8px;
+}
+
+.ui-float-label .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+mat-button-toggle-group {
+  height: 30px;
+  margin-top: 8px;
+}
+
+.flags mat-button-toggle {
+  width: 50px;
+}
+.reptype mat-button-toggle {
+  width: 75px;
+}
+
+mat-form-field {
+  margin-left: 10px;
+}

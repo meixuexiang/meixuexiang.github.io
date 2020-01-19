@@ -2,52 +2,71 @@
   <dl fxLayout="column" fxFlex="50%" class="box-in">
     <dt>文本内容：</dt>
     <dd fxFlex>
-      <textarea pInputTextarea [(ngModel)]="source" (input)="onInput('source')"></textarea>
+      <textarea matInput [(ngModel)]="source" (input)="onInput('source')"></textarea>
     </dd>
   </dl>
   <dl fxLayout="column" fxFlex="50%" class="box-out">
     <dt>{{action | uppercase}} 结果：{{action === 'replace' ? '' : matchNumbers}}</dt>
     <dd fxFlex>
-      <textarea pInputTextarea [(ngModel)]="output"></textarea>
+      <textarea matInput [(ngModel)]="output"></textarea>
     </dd>
   </dl>
 </div>
 
-<div fxLayout="row" class="box-edit">
-  <p-selectButton [options]="flagOptions" [(ngModel)]="flags" multiple="multiple" (onChange)="onInput('flags')"></p-selectButton>
-  <span fxFlex="auto" class="ui-float-label">
-    <input type="text" [(ngModel)]="pattern" (input)="onInput('pattern')" pInputText>
-    <label for="float-input">正则：</label>
-  </span>
+<div fxLayout="row" class="box-edit flags">
+  <mat-button-toggle-group name="flags" [value]="flags" [multiple]="true" (change)="onInput('flags', $event)">
+    <mat-button-toggle value="g">G</mat-button-toggle>
+    <mat-button-toggle value="i">I</mat-button-toggle>
+    <mat-button-toggle value="m">M</mat-button-toggle>
+  </mat-button-toggle-group>
+  <mat-form-field fxFlex="auto" class="ui-float-label">
+    <input matInput placeholder="正则" [(ngModel)]="pattern" (input)="onInput('pattern')">
+    <mat-hint></mat-hint>
+  </mat-form-field>
 </div>
 
-<div fxLayout="row" class="box-edit">
-  <p-selectButton [options]="replacementTypeOptions" [(ngModel)]="replacementType" (onChange)="onInput('replacementType')"></p-selectButton>
-  <span *ngIf="replacementType === 's'" fxFlex="auto" class="ui-float-label">
-    <input type="text" pInputText [(ngModel)]="replacementString" (input)="onInput('replacementString')">
-    <label for="float-input">替换：</label>
-  </span>
-  <div *ngIf="replacementType === 'f'" fxFlex="auto" class="ui-float-label">
-    <textarea pInputTextarea [(ngModel)]="replacementFunc" (input)="onInput('replacementFunc')"></textarea>
-  </div>
+<div fxLayout="row" class="box-edit reptype">
+  <mat-button-toggle-group name="replacementType" [value]="replacementType"
+    (change)="onInput('replacementType', $event)">
+    <mat-button-toggle value="s">String</mat-button-toggle>
+    <mat-button-toggle value="f">Function</mat-button-toggle>
+  </mat-button-toggle-group>
+
+  <ng-container *ngIf="replacementType === 's'">
+    <mat-form-field fxFlex="auto" class="ui-float-label">
+      <input matInput placeholder="替换" [(ngModel)]="replacementString" (input)="onInput('replacementString')">
+      <mat-hint></mat-hint>
+    </mat-form-field>
+  </ng-container>
+
+  <ng-container *ngIf="replacementType === 'f'">
+    <mat-form-field fxFlex="auto" class="ui-float-label">
+      <textarea matInput placeholder="替换" [(ngModel)]="replacementFunc" (input)="onInput('replacementFunc')"></textarea>
+      <mat-hint></mat-hint>
+    </mat-form-field>
+  </ng-container>
 </div>
 
 <div class="ui-btn-bar">
-  <button pButton (click)="action = 'exec'; onInput('source')" label="Exec"> </button>
-  <button pButton (click)="action = 'match'; onInput('source')" label="Match"></button>
-  <button pButton (click)="action = 'replace'; onInput('source')" label="Replace"></button>
-  <button pButton (click)="copyL2R()" label="L←R"></button>
-  <button pButton (click)="reset()" label="Reset"></button>
-  <button pButton label="帮助" (click)="op.toggle($event)" class="button-help"></button>
+  <button mat-stroked-button (click)="action = 'exec'; onInput('source')">Exec</button>
+  <button mat-stroked-button (click)="action = 'match'; onInput('source')">Match</button>
+  <button mat-stroked-button (click)="action = 'replace'; onInput('source')">Replace</button>
+  <button mat-stroked-button (click)="copyL2R()">L←R</button>
+  <button mat-stroked-button (click)="reset()">Reset</button>
+  <button mat-stroked-button (click)="isHelpOverlayOpen = !isHelpOverlayOpen" class="button-help"
+    #help="cdkOverlayOrigin" cdkOverlayOrigin>帮助</button>
   <a href="mailto:mxx@vip.qq.com" class="report-bug fa fa-envelope-o" title="For best tools, Email me"></a>
 </div>
 
-<p-toast></p-toast>
-<p-overlayPanel #op>
+<ng-template cdkConnectedOverlay [cdkConnectedOverlayFlexibleDimensions]="true" [cdkConnectedOverlayOrigin]="help"
+  [cdkConnectedOverlayOpen]="isHelpOverlayOpen" (backdropClick)="closeHelpOverlay()"
+  [cdkConnectedOverlayMinWidth]="'100%'" [cdkConnectedOverlayPositions]="overlayPosition"
+  [cdkConnectedOverlayPanelClass]="'options-panel'" cdkConnectedOverlayHasBackdrop>
   <div class="box-help">
     <ul>
       <li>
-        <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp" target="_blank">MDN web docs -- RegExp</a>
+        <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp"
+          target="_blank">MDN web docs -- RegExp</a>
       </li>
       <li>
         <a href="http://www.jb51.net/tools/regex.htm" target="_blank">常用正则表达式, 如何写出高效率的正则表达式</a>
@@ -60,4 +79,4 @@
       </li>
     </ul>
   </div>
-</p-overlayPanel>
+</ng-template>

@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 /* Fix for warning with electron - see https://github.com/electron/electron/issues/4420 */
 
 ::selection {
@@ -28,7 +27,6 @@ body {
 
 body {
   background: center / cover no-repeat url(./assets/Sierra.jpg);
-
 }
 
 // .host-env-box .ui-inputswitch {
@@ -57,4 +55,18 @@ body {
 
 .jsoneditor-wrapper .ace-jsoneditor .ace_gutter {
   background: rgba(235, 235, 235, 0);
+}
+
+.options-panel {
+  background-color: #fff;
+}
+
+app-regexp
+  .mat-button-toggle-appearance-standard
+  .mat-button-toggle-label-content {
+  line-height: 30px;
+}
+
+app-regexp .mat-button-toggle-checked .mat-button-toggle-focus-overlay {
+  border-bottom: solid 18px;
 }

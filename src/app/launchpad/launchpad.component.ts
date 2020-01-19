@@ -132,6 +132,7 @@ export class LaunchpadComponent implements OnInit {
     let win = new BrowserWindow({
       width, height,
       webPreferences: {
+        devTools: true,
         nodeIntegration: true,
       }
     });

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Message } from 'primeng/api';
-import { MessageService } from 'primeng/api';
 
 import { ItemBase, ConfigService } from '../config.service';
 import { ElectronService } from '../../core/services/electron/electron.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+
 // import * as UglifyJS from 'uglify-js/tools/node';
 // const UglifyJS = require('uglify-js/tools/node');
 
@@ -12,7 +12,7 @@ import { ElectronService } from '../../core/services/electron/electron.service';
   selector: 'app-uglify',
   templateUrl: './uglify.component.html',
   styleUrls: ['./uglify.component.scss'],
-  providers: [MessageService, ElectronService]
+  providers: [ElectronService]
 })
 export class UglifyComponent implements OnInit {
   files: any[] = [];
@@ -22,18 +22,19 @@ export class UglifyComponent implements OnInit {
   ast: any;
   arScopeAnalyzerRslt: { msg: string; pos: { file: string; line: number; col: number } }[];
 
-  msgs: Message[] = [];
-
   form: FormGroup;
   items: ItemBase<boolean | string | number | {}>[];
 
   visible = false;
   UglifyJS: any;
+  snackBarOption: MatSnackBarConfig = { duration: 1800, horizontalPosition: 'end', verticalPosition: 'top' };
+  isOptionsOverlayOpen = false;
+  overlayPosition = [{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' }];
 
   constructor(
-    private messageService: MessageService,
     private configService: ConfigService,
-    private es: ElectronService
+    private es: ElectronService,
+    private snackBar: MatSnackBar
   ) {
     this.source = `var cc = 20;
 function K_show(f) {
@@ -54,13 +55,15 @@ function dingSuo_v() { //定朔计算速度测试
 }`;
     this.items = this.configService.getDefaultItems();
     this.form = this.configService.buildForm(this.items);
-    console.log(this.items, this.form);
+    // console.log(this.items, this.form);
     this.UglifyJS = this.es.require('uglify-js');
-    console.log(this.UglifyJS);
-
+    // console.log(this.UglifyJS);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    // this.es.remote.getCurrentWebContents().openDevTools();
+
+  }
 
   onSelect(event) {
     console.log(event);
@@ -87,11 +90,7 @@ function dingSuo_v() { //定朔计算速度测试
     if (this.es.isElectron) {
       this.es.remote.getCurrentWebContents().openDevTools();
     } else {
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Parse success',
-        detail: `View detail by open dev tools`
-      });
+      this.snackBar.open(`View detail by open dev tools`, '', this.snackBarOption);
     }
   }
 
@@ -99,11 +98,7 @@ function dingSuo_v() { //定朔计算速度测试
     try {
       this.ast = this.UglifyJS.parse(this.source);
     } catch (error) {
-      this.messageService.add({
-        severity: 'error',
-        summary: error.message,
-        detail: `line: ${error.line} col: ${error.col}`
-      });
+      this.snackBar.open(`line: ${error.line} col: ${error.col}`, '', this.snackBarOption);
       throw error;
     }
   }
@@ -143,11 +138,7 @@ function dingSuo_v() { //定朔计算速度测试
       console.log(minifyResult);
       this.output = minifyResult.code;
     } catch (error) {
-      this.messageService.add({
-        severity: 'error',
-        summary: error.message,
-        detail: `line: ${error.line} col: ${error.col}`
-      });
+      this.snackBar.open(`line: ${error.line} col: ${error.col}`, '', this.snackBarOption);
       throw error;
     }
   }
@@ -207,4 +198,7 @@ function dingSuo_v() { //定朔计算速度测试
     return [walker, arRslt];
   }
 
+  closeOptionsOverlay() {
+    this.isOptionsOverlayOpen = false;
+  }
 }
