@@ -13,7 +13,7 @@ export const routes: Routes = [
       email: 'wy_hd@163.com',
       desc: '用于练习编写正则表达式，以及使用正则进行文本/文件处理',
       keywords: 'text file exec test match replace',
-      className: 'fa fa-drivers-license-o',
+      className: 'fa fa-registered',
       width: 1024,
       height: 768
     }
@@ -27,7 +27,7 @@ export const routes: Routes = [
       email: 'wy_hd@163.com',
       desc: '用于方便的修改hosts文件',
       keywords: 'switch hosts environment',
-      className: 'fa fa-file-o',
+      className: 'fa fa-file-text-o',
       width: 1024,
       height: 768
     }
@@ -41,7 +41,7 @@ export const routes: Routes = [
       email: 'wy_hd@163.com',
       desc: 'JSON查看编辑工具',
       keywords: 'viewer editor',
-      className: 'fa fa-yelp',
+      className: 'fa fa-file-code-o',
       width: 1024,
       height: 768
     }
@@ -84,7 +84,7 @@ export const routes: Routes = [
       desc: 'UglifyJs',
       keywords:
         'UglifyJs ast lisperator Parser Code generator Compressor Mangler Scope analysis walker transformer ya shuo dai ma',
-      className: 'fa fa-calendar',
+      className: 'fa fa-jsfiddle',
       width: 1024,
       height: 768
     }
@@ -98,7 +98,7 @@ export const routes: Routes = [
       email: 'wy_hd@163.com',
       desc: '时间戳',
       keywords: 'time date shi jian chuo',
-      className: 'fa fa-calendar',
+      className: 'fa fa-clock-o',
       width: 1024,
       height: 768
     }

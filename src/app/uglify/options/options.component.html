@@ -3,24 +3,24 @@
   <dd *ngFor="let item of items;">
     <ng-container [ngSwitch]="item['ctrlType']">
       <ng-container *ngSwitchCase="'checkbox'">
-        <label matTooltip="{{item.title}}"><input [formControlName]="item.key" [id]="item.key"
-            type="checkbox">{{item.key}}</label>
+        <label matTooltip="{{item.title}}" [matTooltipPosition]="'right'">
+          <input [formControlName]="item.key" [id]="item.key" type="checkbox">{{item.key}}</label>
       </ng-container>
       <ng-container *ngSwitchCase="'number'">
-        <label matTooltip="{{item.title}}">
+        <label matTooltip="{{item.title}}" [matTooltipPosition]="'right'">
           <input [formControlName]="item.key" [id]="item.key" type="number" [min]="item['min']"
             [max]="item['max']">{{item.key}}</label>
       </ng-container>
       <ng-container *ngSwitchCase="'text'">
-        <label matTooltip="{{item.title}}">
+        <label matTooltip="{{item.title}}" [matTooltipPosition]="'right'">
           <input [formControlName]="item.key" [id]="item.key" type="text">{{item.key}}</label>
       </ng-container>
       <ng-container *ngSwitchCase="'jsonbool'">
-        <label matTooltip="{{item.title}}">
+        <label matTooltip="{{item.title}}" [matTooltipPosition]="'right'">
           <input [formControlName]="item.key" [id]="item.key" type="checkbox">{{item.key}}</label>
       </ng-container>
       <ng-container *ngSwitchCase="'jsonstring'">
-        <label matTooltip="{{item.title}}">
+        <label matTooltip="{{item.title}}" [matTooltipPosition]="'right'">
           <input [formControlName]="item.key" [id]="item.key" type="text">{{item.key}}</label>
       </ng-container>
     </ng-container>

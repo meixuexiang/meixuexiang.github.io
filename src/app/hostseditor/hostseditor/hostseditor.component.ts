@@ -38,7 +38,7 @@ export class HostseditorComponent implements OnInit {
   child_process: any;
   snackBarOption: MatSnackBarConfig = { duration: 1800, horizontalPosition: 'end', verticalPosition: 'top' };
   isHelpOverlayOpen = false;
-  overlayPosition = [{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' }];
+  overlayPosition = [{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' }];
 
   constructor(
     private hosts: HostsService,

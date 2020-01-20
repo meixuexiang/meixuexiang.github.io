@@ -33,8 +33,8 @@
 
 <ng-template cdkConnectedOverlay [cdkConnectedOverlayFlexibleDimensions]="true" [cdkConnectedOverlayOrigin]="help"
   [cdkConnectedOverlayOpen]="isHelpOverlayOpen" (backdropClick)="closeHelpOverlay()"
-  [cdkConnectedOverlayMinWidth]="'100%'" [cdkConnectedOverlayPositions]="overlayPosition"
-  [cdkConnectedOverlayPanelClass]="'options-panel'">
+  [cdkConnectedOverlayMinWidth]="'200px'" [cdkConnectedOverlayPositions]="overlayPosition"
+  [cdkConnectedOverlayPanelClass]="'options-panel'" cdkConnectedOverlayHasBackdrop>
   <div class="box-help">
     <a href="mailto:mxx@vip.qq.com" class="report-bug fa fa-envelope-o" title="For best tools, Email me"></a>
   </div>
