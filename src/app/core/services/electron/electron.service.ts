@@ -19,7 +19,7 @@ export class ElectronService {
   util: typeof util;
 
   get isElectron(): boolean {
-    return window && window.process && window.process.type;
+    return !!(window && window.process && window.process.type);
   }
 
   constructor() {
