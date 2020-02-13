@@ -1,10 +1,11 @@
-import { app, BrowserWindow, screen } from 'electron';
+import { app, BrowserWindow, screen, ipcMain, dialog } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+require('electron-referer')('');
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
-    serve = args.some(val => val === '--serve');
+  serve = args.some(val => val === '--serve');
 
 function createWindow(): BrowserWindow {
 
@@ -48,6 +49,13 @@ function createWindow(): BrowserWindow {
     win = null;
   });
 
+
+  ipcMain.on('select-dir', async (event, arg) => {
+    const result = await dialog.showOpenDialog(win, {
+      properties: ['openDirectory']
+    });
+    event.reply('select-dir', result);
+  });
   return win;
 }
 

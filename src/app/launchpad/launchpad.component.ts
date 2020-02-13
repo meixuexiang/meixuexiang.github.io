@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Routes } from '@angular/router';
+import { Route, Routes, Router } from '@angular/router';
 import { ElectronService } from '../core/services/electron/electron.service';
 import * as Fuse from 'fuse.js';
 
@@ -46,20 +46,6 @@ export const routes: Routes = [
       height: 768
     }
   },
-  // {
-  //   path: 'payslip',
-  //   loadChildren: './payslip/payslip.module#PayslipModule',
-  //   data: {
-  //     name: '群发工资条',
-  //     version: '1.0',
-  //     email: 'wy_hd@163.com',
-  //     desc: '企业工资条群发工具',
-  //     keywords: 'qi ye gong zi tiao qun fa',
-  //     className: 'fa fa-envelope-o',
-  //     width: 1024,
-  //     height: 768
-  //   }
-  // },
   {
     path: 'sxwnl',
     loadChildren: './sxwnl/sxwnl.module#SxwnlModule',
@@ -102,6 +88,20 @@ export const routes: Routes = [
       width: 1024,
       height: 768
     }
+  },
+  {
+    path: 'film',
+    loadChildren: './film/film.module#FilmModule',
+    data: {
+      name: '影片库管理器',
+      version: '1.0',
+      email: 'wy_hd@163.com',
+      desc: '影片库管理器',
+      keywords: 'ying pian ku guan li qi film movie rename',
+      className: 'fa fa-clock-o',
+      width: 1024,
+      height: 768
+    }
   }
 ];
 
@@ -120,11 +120,13 @@ export class LaunchpadComponent implements OnInit {
     return keyword ? this.fuse.search(keyword) : routes;
   }
 
-  constructor(private es: ElectronService) { }
+  constructor(private es: ElectronService,
+    private router: Router) { }
 
   ngOnInit() { }
 
   openURL(event: any, url: string, width: number = 800, height: number = 600) {
+    // this.router.navigate([url]);
     console.log(event);
     event.stopPropagation();
     const BrowserWindow = this.es.remote.BrowserWindow;
@@ -133,6 +135,7 @@ export class LaunchpadComponent implements OnInit {
       width, height,
       webPreferences: {
         devTools: true,
+        webSecurity: false,
         nodeIntegration: true,
       }
     });
