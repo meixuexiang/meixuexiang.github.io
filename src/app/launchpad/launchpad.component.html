@@ -5,9 +5,10 @@
   </p>
 </header>
 <main routerLink="/">
-  <div *ngFor="let r of routes; trackBy: trackByPath" class="app-icon-box">
-    <a [routerLink]="" (click)="openURL($event, r.path, r['data']['width'], r['data']['height'])" [class]="r['data']['className']"></a>
-    <p>{{r['data']['name']}}</p>
-  </div>
+  <a *ngFor="let r of routes; trackBy: trackByPath" [routerLink]=""
+    (click)="openURL($event, r.path, r['data']['width'], r['data']['height'])" class="app-icon-box">
+    <i [class]="r['data']['className']"></i>
+    <span>{{r['data']['name']}}</span>
+  </a>
 </main>
 <router-outlet></router-outlet>

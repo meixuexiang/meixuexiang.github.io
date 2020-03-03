@@ -14,10 +14,10 @@ const matchOthers: Routes = [
   },
 ];
 const allRoutes: Routes = [...routes, ...matchOthers];
-console.log(allRoutes);
+// console.log(allRoutes);
 
 @NgModule({
-  imports: [RouterModule.forRoot(allRoutes, { useHash: true, enableTracing: true })],
+  imports: [RouterModule.forRoot(allRoutes, { useHash: true, enableTracing: !true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

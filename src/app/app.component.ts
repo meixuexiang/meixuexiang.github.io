@@ -13,15 +13,15 @@ export class AppComponent {
     // private translate: TranslateService
   ) {
     // translate.setDefaultLang('en');
-    console.log('AppConfig', AppConfig);
+    // console.log('AppConfig', AppConfig);
 
-    if (es.isElectron) {
-      console.log(process.env);
-      console.log('Mode electron');
-      console.log('Electron ipcRenderer', es.ipcRenderer);
-      console.log('NodeJS childProcess', es.childProcess);
-    } else {
-      console.log('Mode web');
-    }
+    // if (es.isElectron) {
+    //   console.log(process.env);
+    //   console.log('Mode electron');
+    //   console.log('Electron ipcRenderer', es.ipcRenderer);
+    //   console.log('NodeJS childProcess', es.childProcess);
+    // } else {
+    //   console.log('Mode web');
+    // }
   }
 }

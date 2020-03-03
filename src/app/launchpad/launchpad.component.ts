@@ -98,7 +98,7 @@ export const routes: Routes = [
       email: 'wy_hd@163.com',
       desc: '影片库管理器',
       keywords: 'ying pian ku guan li qi film movie rename',
-      className: 'fa fa-clock-o',
+      className: 'fa fa-film',
       width: 1024,
       height: 768
     }

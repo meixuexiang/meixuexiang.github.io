@@ -5,31 +5,31 @@
     display: flex;
     flex-direction: row;
     padding: 5px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
   }
-  
+
   :host>textarea {
     flex: 35%;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     padding: 4px;
   }
-  
+
   :host>.result-list {
     flex: 65%;
   }
-  
+
   .result-list {
     overflow: auto;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     padding: 4px 10px;
   }
-  
+
   .result-item {
     display: flex;
     flex-direction: row;
     margin-bottom: 10px;
   }
-  
+
   .result-item dt {
     width: 250px;
     white-space: nowrap;
@@ -38,9 +38,8 @@
     padding-right: 10px;
     line-height: 28px;
   }
-  
+
   .result-item dd {
     line-height: 14px;
     flex: 1;
   }
-  
