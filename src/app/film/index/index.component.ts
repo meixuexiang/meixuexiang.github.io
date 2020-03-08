@@ -13,10 +13,12 @@ const superagent = require("superagent");
 export class IndexComponent implements OnInit, AfterViewChecked {
   @ViewChild(ExplorerComponent, { static: true }) explorer: ExplorerComponent;
   folder: string = '/Volumes/青龙/电影';
-  operator: 'douban' | '' = '';
+  operator: 'douban' | 'search' | '' = '';
 
   doubanSearchName = '';
   doubanSearchResult = null;
+  folderSearchName = '';
+  folderSearchResult = null;
 
   constructor(
     private electron: ElectronService,
@@ -75,6 +77,38 @@ export class IndexComponent implements OnInit, AfterViewChecked {
     } catch (err) {
       console.error(err);
     }
+  }
+
+  searchOperate() {
+    this.operator = 'search';
+    const node = this.explorer.getSelected();
+    this.folderSearchName = node ? node.name : '';
+  }
+
+  searchFolder(key: string, input) {
+    if (input.selectionStart !== input.selectionEnd) {
+      key = key.slice(input.selectionStart, input.selectionEnd);
+    }
+    this.folderSearchResult = this._searchFolder(key, this.explorer.getData());
+  }
+
+  _searchFolder(key, data) {
+    const result = [];
+    data.forEach(node => {
+      if (node.name.indexOf(key) > -1) {
+        result.push(node);
+      }
+      result.push(...this._searchFolder(key, node.children));
+    });
+    return result;
+  }
+
+  openItem(node) {
+    this.electron.shell.openItem(node.fullpath);
+  }
+
+  openItemFolder(node) {
+    this.electron.shell.openItem(this.electron.path.dirname(node.fullpath));
   }
 
   genName(item) {

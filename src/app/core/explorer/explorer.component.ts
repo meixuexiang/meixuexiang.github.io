@@ -50,7 +50,7 @@ export class ExplorerComponent implements OnInit, AfterViewChecked {
     this.getTreeNodes(this.root).then(({ data, expansionNodes }) => {
       this.treeControl.expansionModel.clear();
       this.dataSource.data = data;
-      console.log('expansionNodes', expansionNodes);
+      // console.log('expansionNodes', expansionNodes);
       expansionNodes.forEach(node => {
         this.treeControl.expand(node);
       });
@@ -59,6 +59,18 @@ export class ExplorerComponent implements OnInit, AfterViewChecked {
 
   getSelected() {
     return this.selected;
+  }
+
+  getRootFolder() {
+    return this._folder;
+  }
+
+  getRootNode() {
+    return this._folder;
+  }
+
+  getData() {
+    return this.dataSource.data;
   }
 
   nodeSelectHandler(node: Entity) {

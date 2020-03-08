@@ -1,7 +1,6 @@
 import { app, BrowserWindow, screen, ipcMain, dialog } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
-require('electron-referer')('');
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -25,6 +24,7 @@ function createWindow(): BrowserWindow {
   });
 
   if (serve) {
+    require('electron-referer')('');
     require('electron-reload')(__dirname, {
       electron: require(`${__dirname}/node_modules/electron`)
     });
