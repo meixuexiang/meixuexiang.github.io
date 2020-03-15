@@ -5,8 +5,10 @@ import { ItemBase, ConfigService } from '../config.service';
 import { ElectronService } from '../../core/services/electron/electron.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-// import * as UglifyJS from 'uglify-js/tools/node';
-// const UglifyJS = require('uglify-js/tools/node');
+// import * as UglifyJS from 'uglify-js';
+const UglifyJS = require('uglify-js');
+
+console.log(UglifyJS);
 
 @Component({
   selector: 'app-uglify',
@@ -26,7 +28,7 @@ export class UglifyComponent implements OnInit {
   items: ItemBase<boolean | string | number | {}>[];
 
   visible = false;
-  UglifyJS: any;
+  UglifyJS = UglifyJS;
   snackBarOption: MatSnackBarConfig = { duration: 1800, horizontalPosition: 'end', verticalPosition: 'top' };
   isOptionsOverlayOpen = false;
   overlayPosition = [{ originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'top' }];
@@ -56,7 +58,7 @@ function dingSuo_v() { //定朔计算速度测试
     this.items = this.configService.getDefaultItems();
     this.form = this.configService.buildForm(this.items);
     // console.log(this.items, this.form);
-    this.UglifyJS = this.es.require('uglify-js');
+    // this.UglifyJS = this.es.require('uglify-js');
     // console.log(this.UglifyJS);
   }
 

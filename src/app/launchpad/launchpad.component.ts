@@ -15,7 +15,8 @@ export const routes: Routes = [
       keywords: 'text file exec test match replace',
       className: 'fa fa-registered',
       width: 1024,
-      height: 768
+      height: 768,
+      electronRequired: false
     }
   },
   {
@@ -29,7 +30,8 @@ export const routes: Routes = [
       keywords: 'switch hosts environment',
       className: 'fa fa-file-text-o',
       width: 1024,
-      height: 768
+      height: 768,
+      electronRequired: true
     }
   },
   {
@@ -43,7 +45,8 @@ export const routes: Routes = [
       keywords: 'viewer editor',
       className: 'fa fa-file-code-o',
       width: 1024,
-      height: 768
+      height: 768,
+      electronRequired: false
     }
   },
   {
@@ -57,7 +60,8 @@ export const routes: Routes = [
       keywords: 'shou xing wan nian li calendar nong li gong li',
       className: 'fa fa-calendar',
       width: 1024,
-      height: 768
+      height: 768,
+      electronRequired: false
     }
   },
   {
@@ -72,7 +76,8 @@ export const routes: Routes = [
         'UglifyJs ast lisperator Parser Code generator Compressor Mangler Scope analysis walker transformer ya shuo dai ma',
       className: 'fa fa-jsfiddle',
       width: 1024,
-      height: 768
+      height: 768,
+      electronRequired: true
     }
   },
   {
@@ -86,7 +91,8 @@ export const routes: Routes = [
       keywords: 'time date shi jian chuo',
       className: 'fa fa-clock-o',
       width: 1024,
-      height: 768
+      height: 768,
+      electronRequired: false
     }
   },
   {
@@ -100,7 +106,8 @@ export const routes: Routes = [
       keywords: 'ying pian ku guan li qi film movie rename',
       className: 'fa fa-film',
       width: 1024,
-      height: 768
+      height: 768,
+      electronRequired: true
     }
   }
 ];
@@ -120,15 +127,19 @@ export class LaunchpadComponent implements OnInit {
     return keyword ? this.fuse.search(keyword) : routes;
   }
 
-  constructor(private es: ElectronService,
-    private router: Router) { }
+  constructor(
+    public es: ElectronService,
+    private router: Router
+  ) { }
 
   ngOnInit() { }
 
-  openURL(event: any, url: string, width: number = 800, height: number = 600) {
+  openURL(event: any, { path, data: { width, height } }) {
+    if (!this.es.isElectron) { return }
     // this.router.navigate([url]);
     console.log(event);
     event.stopPropagation();
+    event.preventDefault();
     const BrowserWindow = this.es.remote.BrowserWindow;
 
     let win = new BrowserWindow({
@@ -140,7 +151,7 @@ export class LaunchpadComponent implements OnInit {
       }
     });
     win.on('close', () => win = null);
-    const targetURL = `${location.href}${url}`;
+    const targetURL = `${location.href}${path}`;
     win.loadURL(targetURL);
     console.log(`Opening: `, targetURL);
     win.show();

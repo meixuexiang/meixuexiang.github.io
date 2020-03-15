@@ -5,10 +5,12 @@
   </p>
 </header>
 <main routerLink="/">
-  <a *ngFor="let r of routes; trackBy: trackByPath" [routerLink]=""
-    (click)="openURL($event, r.path, r['data']['width'], r['data']['height'])" class="app-icon-box">
-    <i [class]="r['data']['className']"></i>
-    <span>{{r['data']['name']}}</span>
-  </a>
+  <ng-container *ngFor="let r of routes; trackBy: trackByPath">
+    <a *ngIf="!r.data['electronRequired'] || es.isElectron" [routerLink]="r.path" target="_blank"
+      (click)="openURL($event, r)" class="app-icon-box">
+      <i [class]="r['data']['className']"></i>
+      <span>{{r['data']['name']}}</span>
+    </a>
+  </ng-container>
 </main>
 <router-outlet></router-outlet>
