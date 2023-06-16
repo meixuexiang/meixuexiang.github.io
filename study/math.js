@@ -38,7 +38,7 @@ function generateProblem() {
   let left = 0;
   let right = 0;
   return op === '+' ? {
-    left: left = getRandomInt(0, 98), op, right: right = getRandomInt(0, 100 - left),
+    left: left = getRandomInt(0, 98), op, right: right = getRandomInt(0, 99 - left),
     result: eval(`${left}${op}${right}`),
     choise: null
   } : {
